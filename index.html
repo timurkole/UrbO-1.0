@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URBOGE</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/service-worker.js')
+                .then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(error) {
+                    console.log('ServiceWorker registration failed: ', error);
+                });
+            });
+        }
+    </script>
+</head>
+<body class="dark-theme">
+    <div id="header">
+        <h1>URBOGE</h1>
+        <div>
+            <button id="add-project-btn" class="button button-add">+</button>
+            <button id="settings-btn" class="button button-settings">&#9881;</button>
+        </div>
+    </div>
+    <div id="projects-container"></div>
+
+    <!-- Modals for Adding Project, Changing Price, and Editing Name -->
+    <div id="add-project-modal" class="modal">
+        <div class="modal-content">
+            <h2>Add Project</h2>
+            <label for="project-name">Name:</label>
+            <input type="text" id="project-name" placeholder="Write project's name">
+            <div id="error-message" class="error-message"></div>
+            <button id="next-btn" class="button">Next</button>
+        </div>
+    </div>
+    <div id="set-price-modal" class="modal">
+        <div class="modal-content">
+            <h2>Set Price</h2>
+            <label for="project-price">Price:</label>
+            <input type="number" id="project-price" placeholder="price">
+            <button id="save-btn" class="button">Save</button>
+        </div>
+    </div>
+    <div id="buy-modal" class="modal">
+        <div class="modal-content">
+            <h2 id="buy-project-name"></h2>
+            <h3 id="current-price"></h3>
+            <h4 id="default-price"></h4>
+            <button id="bought-btn" class="button">Bought</button>
+            <button id="delete-btn" class="button" style="background-color: var(--error-color);">Delete</button>
+            <button id="exit-btn" class="button">Exit</button>
+        </div>
+    </div>
+    <div id="confirm-delete-modal" class="modal">
+        <div class="modal-content">
+            <h2>Are you sure you want to delete this project?</h2>
+            <div class="modal-buttons">
+                <button id="confirm-delete-yes" class="button" style="background-color: var(--error-color);">Yes</button>
+                <button id="confirm-delete-no" class="button">No</button>
+            </div>
+        </div>
+    </div>
+    <div id="edit-name-modal" class="modal">
+        <div class="modal-content">
+            <h2>Edit Project Name</h2>
+            <input type="text" id="edit-project-name" placeholder="New project name">
+            <div id="edit-error-message" class="error-message"></div>
+            <button id="save-name-btn" class="button">Save</button>
+        </div>
+    </div>
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <h2>Settings</h2>
+            <label class="theme-switch">
+                <input type="checkbox" id="theme-switch">
+                <span class="slider"></span>
+            </label>
+            <div class="modal-buttons">
+                <button id="settings-exit-btn" class="button">Exit</button>
+            </div>
+            <div class="footer-text">This app was designed by Timurs Koleda</div>
+            <div class="footer-text">Was created by ChatGPT and Timurs Koleda</div>
+            <div class="footer-text">Version: ur.co 1.0</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
